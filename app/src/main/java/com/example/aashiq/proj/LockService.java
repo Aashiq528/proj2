@@ -1,0 +1,52 @@
+package com.example.aashiq.proj;
+
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Binder;
+import android.os.IBinder;
+
+public class LockService extends Service {
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_USER_PRESENT);
+        final BroadcastReceiver mReceiver = new ScreenReceiver();
+        registerReceiver(mReceiver, filter);
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+
+
+//    @Override
+//    public void onStart(Intent intent, int startId) {
+//        boolean screenOn = intent.getBooleanExtra("screen_state", false);
+//        if (wasScreenOn==false) {
+//
+//            WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+//            wifi.setWifiEnabled(false);
+//
+//
+//        } else {
+//            WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+//            wifi.setWifiEnabled(true);
+//
+//        }
+//    }
+
+}
+
+   // wait
